@@ -12,6 +12,11 @@ public class ShapesTester {
         box.addShape(cir);
 
         System.out.println(box);
+
+        box.removeShape(tr);
+
+        System.out.println(box);
+        
         
     }
 

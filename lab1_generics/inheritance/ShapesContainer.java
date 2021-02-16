@@ -1,3 +1,5 @@
+//Inheritance to do minimal generics
+
 public class ShapesContainer {
 
 
@@ -25,8 +27,24 @@ public class ShapesContainer {
     }
 
 
-    public void removeShape(Shape s) {
+    public Shape removeShape(Shape s) {
 
+        Shape tmp = null;
+        for(int i = 0; i < shapes.length; i++) {
+            if(shapes[i] == s) {
+                tmp = shapes[i];
+                shapes[i] = null;
+                for(int j = i; j < pos; j++) {
+                    shapes[j] = shapes[j+1];
+                    j++;
+                }
+                pos--;
+                shapes[pos] = null;
+                break;
+            }
+        }
+
+        return tmp;
 
     }
 
@@ -44,9 +62,15 @@ public class ShapesContainer {
 
 
     //search shapes either by color (String) or area (int)
-    public Shape search(Shape o) {
+    public Shape search(Shape s) {
 
-        return o;
+        for(Shape tmp : shapes) {
+            if(s == tmp) {
+                return tmp;
+            }
+        }
+
+        return null;
 
     }
 
