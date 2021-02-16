@@ -1,6 +1,6 @@
-//Inheritance
+//Inheritance to do minimal generics
 
-public class Shape implements Comparable<Shape> {
+public class Shape {
 
 
     protected String type;
@@ -26,13 +26,6 @@ public class Shape implements Comparable<Shape> {
     public String toString() {
 
         return type + ": " + color + ", " + area;
-
-    }
-
-
-    public int compareTo(Shape o) {
-
-        return this.area - o.area;
 
     }
 
