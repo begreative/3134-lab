@@ -16,7 +16,7 @@ public class StuffContainer {
     }
 
 
-    public void addShape(Object s) {
+    public void addStuff(Object s) {
 
         if(pos >= stuff.length) {
             expandContainer();
@@ -27,7 +27,7 @@ public class StuffContainer {
     }
 
 
-    public Object removeShape(Object s) {
+    public Object removeStuff(Object s) {
 
         Object tmp = null;
         for(int i = 0; i < stuff.length; i++) {

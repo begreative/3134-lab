@@ -1,15 +1,15 @@
-//Object superclass to do generics
+//Real generics
 
 public class ShapesTester {
 
     public static void main(String[] args) {
         
         Square sq = new Square("blue", 2);
-        Circle cir = new Circle("red", 3);
+        // Circle cir = new Circle("red", 3);
         
-        StuffContainer box = new StuffContainer();
+        StuffContainer<Square> box = new StuffContainer<>();
         box.addStuff(sq);
-        box.addStuff(cir);
+        // box.addStuff(cir);
 
         System.out.println(box);
 
