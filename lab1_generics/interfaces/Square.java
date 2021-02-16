@@ -1,3 +1,5 @@
+//Interfaces to do minimal generics
+
 public class Square implements Shape {
 
 

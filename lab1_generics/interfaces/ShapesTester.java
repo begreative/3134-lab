@@ -1,4 +1,4 @@
-//Inheritance to do minimal generics
+//Interfaces to do minimal generics
 
 public class ShapesTester {
 
