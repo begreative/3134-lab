@@ -1,0 +1,3 @@
+class MilitaryTester{
+    /* to do */
+}
