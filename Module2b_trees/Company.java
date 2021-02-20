@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Company{
 
     /* Unless otherwise specified, all of this file should be written by students.
@@ -31,47 +33,91 @@ class Company{
     }
 
     private static int getLevelRecurse(String id, Node head){
-        
+
         if(head == null){
             System.out.println("Employee not found.");
             return -1;
         }else if(head.myEmployee.getID().equals(id)){
             return head.myEmployee.getLevel();
         }else if(head.myEmployee.getID().compareTo(id)<0){
-            return getLevelRecurse(id, head.left);
-        }else{
             return getLevelRecurse(id, head.right);
+        }else{
+            return getLevelRecurse(id, head.left);
         }  
 
     }
 
     public static void hire(Employee newEmployee, double startingSalary){
-        hireRecurse(newEmployee, startingSalary, founder);
+        Node newNode = hireRecurse(newEmployee, startingSalary, founder);
+        System.out.println("Added: "+ newNode.myEmployee);
     }
 
-    private static void hireRecurse(Employee newEmployee, double startingSalary, Node head){
+    private static Node hireRecurse(Employee newEmployee, double startingSalary, Node head){
         
         Node newnode = new Node(newEmployee); 
         
-        if (head == null){
+        if(head == null){
             head = newnode;
             head.myEmployee.updateSalary(startingSalary); 
+            return head;
         }else if(newnode.myEmployee.compareTo(head.myEmployee) < 0)
-            hireRecurse(newEmployee, startingSalary, head.left);
+            head.left = hireRecurse(newEmployee, startingSalary, head.left);
         else if(newnode.myEmployee.compareTo(head.myEmployee) > 0)
-            hireRecurse(newEmployee, startingSalary, head.right);
-        else
+            head.right = hireRecurse(newEmployee, startingSalary, head.right);
+        else{
             System.out.println("Error: duplicate employee");
+        }
+        
+        return head;
         
     }
 
-    //Extra method for extra time: practice delete by firing someone
-    //public static void fire(Employee toFire){}
+    /*
+    Find people by their given level.
+    This will require doing a full traversal -- try doing it breadth first, to help with the homework.
+    This will also provide motivation to talk about heaps
+    */
+    
+    public static List<Employee> findByLevel(int level){
+        //do breadth first - like pretty print
+        List<Employee> atLevel = new LinkedList<>(); //Question: should we use LinkedList or ArrayList?
+        LinkedList<Node> myQ = new LinkedList<Node>();
+        myQ.addLast(founder);
+        while(!myQ.isEmpty()){
+            
+            Node tmp = myQ.removeFirst();
+            
+            if(tmp.left!=null){
+                myQ.addLast(tmp.left);
+            }
+            if(tmp.right!=null){
+                myQ.addLast(tmp.right);
+            }
 
-    //Extra method for extra time: find people by rank 
-    //SHOULD BE PRIORITIZED TO LEAD INTO HEAPS FOR THE NEXT WEEK
-    //public static Employee[] findByRank(int rank){}
+            if(tmp.myEmployee.getLevel()==level){
+                atLevel.add(0,tmp.myEmployee);
+            }
+        }
+        return atLevel;
+    }
 
-    //Add something like mirror()
+    /* Methods below will be provided to help with testing */
+
+    public static void print(){
+        printR(founder);
+    }
+
+    public static void printR(Node head){
+        if(head==null){
+            return;
+        }else{
+            System.out.println(head.myEmployee);
+            System.out.println("Left:");
+            printR(head.left);
+            System.out.println("Right:");
+            printR(head.right);
+        }
+    }
+    
       
 }
