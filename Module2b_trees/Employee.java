@@ -1,17 +1,17 @@
 class Employee implements Comparable<Employee>{
     
-    private String employee_id;
+    private String employeeID;
     
     private int level;
     private double salary;
     
     public Employee(String id, int lev){
-        employee_id = id;
+        employeeID = id;
         level = lev;
     }
     
     public String toString(){
-        return "ID: " + employee_id + "; Level: " + level;
+        return "ID: " + employeeID + "; Level: " + level;
     }
 
     public void updateSalary(double sal){
@@ -19,7 +19,7 @@ class Employee implements Comparable<Employee>{
     }
 
     public String getID(){
-        return employee_id;
+        return employeeID;
     }
 
     public int getLevel(){
@@ -27,7 +27,7 @@ class Employee implements Comparable<Employee>{
     }
 
     public int compareTo(Employee other){
-        return employee_id.compareTo(other.getID());
+        return employeeID.compareTo(other.getID());
     }
 
 }
