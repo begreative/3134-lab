@@ -31,4 +31,8 @@ class Personnel implements Comparable<Personnel>{
         return id.compareTo(other.getID());
     }
 
+    public String toString(){
+        return "ID: " + id + "; Deployment Status: " + deploymentStatus;
+    }
+
 }

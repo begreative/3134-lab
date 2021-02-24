@@ -32,9 +32,9 @@ class Military{
         }else if(head.myPersonnel.getID().equals(id)){
             head.myPersonnel.deploy();
         }else if(head.myPersonnel.getID().compareTo(id)<0){
-            deployRecurse(id, head.left);
-        }else{
             deployRecurse(id, head.right);
+        }else{
+            deployRecurse(id, head.left);
         }  
 
     }
@@ -43,7 +43,7 @@ class Military{
         enlistRecurse(newPersonnel, deploymentStatus, commanderInChief);
     }
 
-    private static void enlistRecurse(Personnel newPersonnel, boolean deploymentStatus, Node head){
+    private static Node enlistRecurse(Personnel newPersonnel, boolean deploymentStatus, Node head){
         
         Node newnode = new Node(newPersonnel); 
         if (head == null){
@@ -52,13 +52,32 @@ class Military{
                 head.myPersonnel.deploy(); 
             else
                 head.myPersonnel.undeploy(); 
+            return head;
         }else if(newnode.myPersonnel.compareTo(head.myPersonnel) < 0)
-            enlistRecurse(newPersonnel, deploymentStatus, head.left);
+            head.left = enlistRecurse(newPersonnel, deploymentStatus, head.left);
         else if(newnode.myPersonnel.compareTo(head.myPersonnel) > 0)
-            enlistRecurse(newPersonnel, deploymentStatus, head.right);
+            head.right = enlistRecurse(newPersonnel, deploymentStatus, head.right);
         else
             System.out.println("Error: duplicate personnel");
         
+        return head;
+    }
+    
+    
+    public static void print(){
+        printR(commanderInChief);
+    }
+
+    public static void printR(Node head){
+        if(head==null){
+            return;
+        }else{
+            System.out.println(head.myPersonnel);
+            System.out.println("Left:");
+            printR(head.left);
+            System.out.println("Right:");
+            printR(head.right);
+        }
     }
 
 }
